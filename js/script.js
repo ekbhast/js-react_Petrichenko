@@ -75,12 +75,12 @@ function showMyDB(hidden){
 
 function writeYourGenres(){
 	for (let i = 0; i<3; i++){		
-		let a = prompt(`Ваш любимый жанр под номером ${i+1}`,'Введите название фильма');	
-		if (a === 0 || a === null || a.length > 20){
+		let genre = prompt(`Ваш любимый жанр под номером ${i+1}`,'Введите название фильма');	
+		if (genre === 0 || genre === null || genre.length > 20){
 			alert('Необходимо ввести жанр фильма не длиннее 20 символов!');
 			i--;
 		} else {
-			personalMovieDB.genres[i] = a;
+			personalMovieDB.genres[i] = genre;
 		}
 	}
 }
