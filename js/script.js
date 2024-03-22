@@ -2,41 +2,16 @@
 
 /* Задание на урок:
 
-1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
-'Сколько фильмов вы уже посмотрели?'
+1) Первую часть задания повторить по уроку
 
-2) Создать объект personalMovieDB и в него поместить такие свойства:
-    - count - сюда передается ответ на первый вопрос
-    - movies - в это свойство поместить пустой объект
-    - actors - тоже поместить пустой объект
-    - genres - сюда поместить пустой массив
-    - privat - в это свойство поместить boolean(логическое) значение false
+2) Создать функцию showMyDB, которая будет проверять свойство privat. Если стоит в позиции
+false - выводит в консоль главный объект программы
 
-3) Задайте пользователю по два раза вопросы:
-    - 'Один из последних просмотренных фильмов?'
-    - 'На сколько оцените его?'
-Ответы стоит поместить в отдельные переменные
-Записать ответы в объект movies в формате: 
-    movies: {
-        'logan': '8.1'
-    }
+3) Создать функцию writeYourGenres в которой пользователь будет 3 раза отвечать на вопрос 
+"Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
+genres
 
-Проверить, чтобы все работало без ошибок в консоли */
-
-/* Задание на урок:
-
-1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
-
-2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
-отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
-возвращаем пользователя к вопросам опять
-
-3) При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
-"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
-"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
-
-4) Потренироваться и переписать цикл еще двумя способами*/
-
+P.S. Функции вызывать не обязательно*/
 const personalMovieDB = {
 	count:0,
 	movies: {},
@@ -45,42 +20,74 @@ const personalMovieDB = {
 	privat: false
 };
 
-for (let i = 0; i<1; i++){
-	personalMovieDB.count  = +prompt('Сколько фильмов вы посмотрели?','');
 
-	if (personalMovieDB.count===0 || isNaN(personalMovieDB.count)){
-		alert('Необходимо вставить число!');
-		i--;
-	}
-}
-
-if (personalMovieDB.count < 10) {
-	alert('Просмотрено довольно мало фильмов');
-} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30){
-	alert('Вы классический зритель');
-} else {
-	alert('Вы киноман');
-}
-
-
-for (let i = 0; i < personalMovieDB.count; i++){
-
-	let a;
-	for (let i = 0; i<1; i++){		
-		a = prompt('Один из последних просмотренных фильмов?','Введите название фильма');
-		console.log(a);		
-		if (a === 0 || a === null || a.length > 20){
-			alert('Необходимо ввести название фильма не длиннее 20 символов!');
-			i--;
-		}
-	}
-
-	for (let i = 0; i<1; i++) {
-		personalMovieDB.movies[a] = +prompt ('На сколько оцените его?','');
-		if (personalMovieDB.movies[a]===0 || isNaN(personalMovieDB.movies[a])){
+function start (){
+	for (let i = 0; i<1; i++){
+		personalMovieDB.count  = +prompt('Сколько фильмов вы посмотрели?','');
+	
+		if (personalMovieDB.count == null || isNaN(personalMovieDB.count) || personalMovieDB.count == ''){
 			alert('Необходимо вставить число!');
 			i--;
 		}
 	}
 }
-console.log (personalMovieDB);
+
+function detectPersomalLevel () {
+	if (personalMovieDB.count < 10) {
+		alert('Просмотрено довольно мало фильмов');
+	} else if (personalMovieDB.count > 10 && personalMovieDB.count < 30){
+		alert('Вы классический зритель');
+	} else  if (personalMovieDB.count >= 30){
+		alert('Вы киноман');
+	} else {
+		alert('Произошла ошибка');
+	}
+}
+
+function rememberMyFilms(){
+	for (let i = 0; i < personalMovieDB.count; i++){
+
+		let a;
+		for (let i = 0; i<1; i++){		
+			a = prompt('Один из последних просмотренных фильмов?','Введите название фильма');	
+			if (a === 0 || a === null || a.length > 20){
+				alert('Необходимо ввести название фильма не длиннее 20 символов!');
+				i--;
+			}
+		}
+	
+		for (let i = 0; i<1; i++) {
+			personalMovieDB.movies[a] = +prompt ('На сколько оцените его?','');
+			if (personalMovieDB.movies[a]===0 || isNaN(personalMovieDB.movies[a])){
+				alert('Необходимо вставить число!');
+				i--;
+			}
+		}
+	}
+
+}
+
+function showMyDB(hidden){
+	if (!hidden){
+		console.log(personalMovieDB);
+	}
+}
+
+function writeYourGenres(){
+	for (let i = 0; i<3; i++){		
+		let a = prompt(`Ваш любимый жанр под номером ${i+1}`,'Введите название фильма');	
+		if (a === 0 || a === null || a.length > 20){
+			alert('Необходимо ввести жанр фильма не длиннее 20 символов!');
+			i--;
+		} else {
+			personalMovieDB.genres[i] = a;
+		}
+	}
+}
+
+// start();
+// writeYourGenres();
+showMyDB(personalMovieDB.privat);
+// detectPersomalLevel();
+// rememberMyFilms();
+// console.log (personalMovieDB);
